@@ -158,12 +158,6 @@ NTU Clubs & Societies Explorer/
 
 This project is created for educational and informational purposes. Club data is compiled from publicly available sources. For official club information and CCA point allocations, please consult NTU's official resources.
 
-## 🙏 Acknowledgments
-
-- **NTU Student Affairs Office** for club information
-- **Club Representatives** for detailed insights
-- **Web Development Community** for technical guidance
-- **Student Feedback** for feature improvements
 
 ## 📞 Contact
 
