@@ -1129,4 +1129,14 @@ export const clubsData = [
         entryCriteria: { score: 2, justification: "Open to students of legal drinking age. Membership often requires a fee to cover the cost of wines for tasting sessions." },
         description: "The Wine Society aims to promote the appreciation of wine and viticulture. It hosts guided tasting sessions, educational workshops, and events with sommeliers to introduce members to the world of wine in a responsible and sophisticated manner."
     },
+    {
+    name: "NTU Indian Dance (NTUID)",
+    ccaPoints: 5,
+    category: "Arts & Culture",
+    timeLoad: { text: "4 hours/week (2 weekly training sessions: Mon & Thu 7:30-9:30 PM)", value: 4 },
+    physicalLoad: { score: 6, justification: "Moderate physical demands including coordination, flexibility, strength, and endurance across various Indian dance forms (Classical, Folk, Bollywood)" },
+    mentalLoad: { score: 7, justification: "High mental engagement required for learning choreography, cultural understanding, performance pressure, and artistic expression across multiple dance styles" },
+    entryCriteria: { score: 2, justification: "Open to all skill levels from complete beginners to experienced dancers - welcomes all NTU students with no prior dance experience required" },
+    description: "First-ever Indian dance club in NTU (est. 2019), cultivating versatility through diverse Indian dance styles including Classical, Folk, and Bollywood. Offers performance opportunities at major events like Festival of Lights, Joint Dance Concert, and external competitions. Provides training, choreography development, and teaching experience for members."
+    },
 ];
