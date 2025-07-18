@@ -327,3 +327,38 @@ input:focus, select:focus {
         page-break-inside: avoid;
     }
 }
+
+/* Google Search Button Styling */
+.google-search-btn {
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.google-search-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.google-search-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.google-search-btn:focus {
+    outline: none;
+    ring: 2px;
+    ring-color: var(--ntu-red);
+    ring-opacity: 0.5;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .google-search-btn {
+        padding: 0.375rem; /* Slightly smaller on mobile */
+    }
+
+    .google-search-btn i {
+        width: 0.875rem;
+        height: 0.875rem;
+    }
+}
