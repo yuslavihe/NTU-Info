@@ -205,10 +205,20 @@ document.addEventListener('DOMContentLoaded', () => {
                             </span>
                         </div>
                     </div>
-                    ${rankValue ? `<div class="text-right">
-                        <div class="text-xs text-gray-500">#${rank}</div>
-                        <div class="text-sm font-semibold text-ntu-blue">${rankValue}</div>
-                    </div>` : ''}
+                    <div class="flex items-center gap-2">
+                        <!-- Google Search Button -->
+                        <button 
+                            class="google-search-btn p-2 bg-gray-100 hover:bg-gray-200 rounded-full transition-colors duration-200 flex items-center justify-center"
+                            data-club-name="${club.name}"
+                            title="Search '${club.name}' on Google"
+                        >
+                            <i data-lucide="search" class="w-4 h-4 text-gray-600"></i>
+                        </button>
+                        ${rankValue ? `<div class="text-right">
+                            <div class="text-xs text-gray-500">#${rank}</div>
+                            <div class="text-sm font-semibold text-ntu-blue">${rankValue}</div>
+                        </div>` : ''}
+                    </div>
                 </div>
                 
                 <p class="text-sm text-gray-600 mb-4 flex-1">${club.description}</p>
@@ -281,6 +291,15 @@ document.addEventListener('DOMContentLoaded', () => {
         selectedClubs.clear();
         updateSelectedCount();
         renderClubs();
+    });
+    document.querySelectorAll('.google-search-btn').forEach(button => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+            const clubName = e.currentTarget.getAttribute('data-club-name');
+            const searchQuery = `NTU ${clubName}`;
+            const googleSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(searchQuery)}`;
+            window.open(googleSearchUrl, '_blank');
+        });
     });
 
     // Initialize
