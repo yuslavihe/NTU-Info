@@ -43,19 +43,13 @@ A comprehensive interactive platform for discovering and analyzing 113 student c
 - **Band D Sports**: 3 CCA points
 
 **For Non-Varsity Clubs:**
-- Points allocated based on commitment level, leadership opportunities, and institutional recognition
-- Range: 1-7 points depending on club type and involvement level
+- Points allocated based on HAS_AnnexA
+- Range: 1-9 points depending on club type and involvement level
 
 **Member Type Assumption:**
 - All CCA points reflect **regular member** participation
 - Leadership positions and executive committee roles would typically earn additional points
 - Points may vary based on actual participation level and achievements
-
-### CCA Points Distribution
-- **High Points (7 pts)**: Elite varsity sports and competitive academic clubs
-- **Medium Points (5 pts)**: Moderate commitment clubs with regular activities
-- **Lower Points (3 pts)**: Casual participation clubs and special interest groups
-
 ## 🔧 Technical Implementation
 
 ### Files Structure
@@ -67,19 +61,6 @@ NTU Clubs & Societies Explorer/
 ├── data.js             # Club data with all metrics
 └── README.md           # This documentation file
 ```
-
-### Technologies Used
-- **HTML5**: Semantic markup and accessibility
-- **CSS3**: Modern styling with Flexbox and Grid
-- **Vanilla JavaScript**: No external dependencies for core functionality
-- **Tailwind CSS**: Utility-first CSS framework via CDN
-- **Lucide Icons**: Clean, customizable icon set
-
-### Key Technical Features
-- **ES6 Modules**: Clean code organization with import/export
-- **Dynamic DOM Manipulation**: Real-time updates based on user interactions
-- **Local State Management**: Efficient handling of selections and filters
-- **Progressive Enhancement**: Works with JavaScript disabled (basic functionality)
 
 ## 🚀 Getting Started
 
