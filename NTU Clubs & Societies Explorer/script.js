@@ -292,14 +292,12 @@ document.addEventListener('DOMContentLoaded', () => {
         updateSelectedCount();
         renderClubs();
     });
-    document.querySelectorAll('.google-search-btn').forEach(button => {
-        button.addEventListener('click', (e) => {
-            e.preventDefault();
-            const clubName = e.currentTarget.getAttribute('data-club-name');
-            const searchQuery = `NTU ${clubName}`;
-            const googleSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(searchQuery)}`;
-            window.open(googleSearchUrl, '_blank');
-        });
+    document.getElementById('club-grid').addEventListener('click', e => {
+        const btn = e.target.closest('.google-search-btn');
+        if (!btn) return;
+        const name = btn.dataset.clubName;
+        const url  = `https://www.google.com/search?q=${encodeURIComponent('NTU ' + name)}`;
+        window.open(url, '_blank');
     });
 
     // Initialize
