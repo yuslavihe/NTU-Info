@@ -168,7 +168,15 @@ For questions, suggestions, or corrections:
 
 ---
 
-**Disclaimer**: This tool is an unofficial resource created to help students explore co-curricular options. For official club registration, requirements, and CCA point allocations, please refer to NTU's official student portal and club websites.
+**Disclaimer**
+All information, including CCA descriptions and point allocations, is collated from publicly available sources—for example, the NTU Student Affairs Office website, official club materials, and community discussions on third-party platforms such as Reddit. Although reasonable efforts were made to cross-check details, no guarantee is given regarding the accuracy, completeness, or current validity of the content. Policies, point schemes, and club statuses can change without notice.
+This document is informational only and should not be treated as an official statement of NTU rules or requirements. Users remain fully responsible for confirming any critical data directly with the relevant CCA committees, the Student Affairs Office, or other authorised university channels before relying on it for hall admission, scholarship, or academic planning decisions.
+By using this document, you acknowledge and agree that the author(s) and contributors accept no liability for losses or consequences arising from reliance on the material provided.
+
+**免责声明**
+所有信息，包括课外活动（CCA）的描述及积分分配，均整理自公开可获取的来源，例如新加坡南洋理工大学（NTU）学生事务处网站、官方社团资料及Reddit等第三方平台上的社区讨论。尽管已尽合理努力对相关细节进行交叉核验，但对于本文件所述内容的准确性、完整性或现行有效性，均不做任何保证。相关政策、积分制度及社团状态均可能在未经通知的情况下发生变更。
+本文件仅为信息参考之目的，不得被视为新加坡南洋理工大学（NTU）规则或要求的官方声明。用户在依据本文件作出宿舍申请、奖学金申请或学术规划等决策前，应自行向相关课外活动（CCA）委员会、学生事务处或其他学校授权渠道直接核实所有关键信息，并对此承担全部责任。
+凡使用本文件者，即视为其确认并同意，作者及贡献者不对因依赖本文件所提供的材料而产生的任何损失或后果承担责任。
 
 **Last Updated**: July 2025
 **Version**: 2.0 (with CCA points and individual selection features)
