@@ -6,7 +6,7 @@ Click the cards below to explore our resources.
 | 工具 / Tool | 简介 / Description | 链接 / Link |
 |-------------|-------------------|-------------|
 | ✈️ **Changi Airport Arrival Guide**<br/>樟宜机场入境全流程指引 | 交互式航站楼地图、交通估价器、IPA/Grab 快捷入口 | [OPEN / 打开](https://yuslavihe.github.io/NTU-Info/airport-guide/) |
-| 🏆 **NTU Clubs & Societies Explorer**<br/>113 个社团多维度筛选工具 | 114 社团数据库 • CCA 积分/难度/时间成本一览 • 个性化对比 | [OPEN / 打开](https://yuslavihe.github.io/NTU-Info/ntu-clubs/) |
+| 🏆 **NTU Clubs & Societies Explorer**<br/>114 个社团多维度筛选工具 | 114 社团数据库 • CCA 积分/难度/时间成本一览 • 个性化对比 | [OPEN / 打开](https://yuslavihe.github.io/NTU-Info/ntu-clubs/) |
 | 🏠 **NTU Room Layout PPT**<br/>宿舍户型尺寸参考 | GH1・GH2・Single Ensuite・Single Plus・Single 平面图；比例 1 cm = 1 m | [DOWNLOAD / 下载](Data/NTU_Room_Layout.pptx) |
 
 ---
