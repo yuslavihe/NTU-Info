@@ -106,6 +106,28 @@
     background: linear-gradient(135deg, var(--primary-blue-light) 0%, var(--primary-blue) 100%);
 }
 
+.resource-card{
+  display:flex;flex-wrap:wrap;
+  background:white;border-radius:var(--radius-2xl);
+  box-shadow:var(--shadow-lg);padding:var(--spacing-2xl);gap:var(--spacing-xl)
+}
+.resource-icon{
+  width:4rem;height:4rem;border-radius:var(--radius-xl);
+  display:flex;align-items:center;justify-content:center;color:#fff;flex-shrink:0
+}
+.resource-body{flex:1;min-width:240px}
+.resource-title{font-size:1.4rem;font-weight:700;margin:0 0 var(--spacing-sm)}
+.resource-desc{color:var(--gray-600);margin:0 0 var(--spacing-lg)}
+.resource-btn{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:linear-gradient(135deg,var(--ntu-red) 0%,var(--ntu-red-light) 100%);
+  color:#fff;padding:var(--spacing-md) var(--spacing-xl);
+  border-radius:var(--radius-lg);font-weight:600;text-decoration:none;
+  transition:var(--transition)
+}
+.resource-btn:hover{transform:translateY(-2px);box-shadow:var(--shadow-md)}
+
+
 /* Update all primary-blue references throughout the file */
 /* This ensures consistency with the main site */
 
