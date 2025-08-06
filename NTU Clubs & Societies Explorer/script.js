@@ -43,11 +43,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const selectedCategory = categoryFilter.value;
 
         return clubsData.filter(club => {
-            const matchesSearch = club.name.toLowerCase().includes(searchTerm) ||
-                club.description.toLowerCase().includes(searchTerm);
+            const matchesSearch = club.name.toLowerCase().includes(searchTerm) || club.description.toLowerCase().includes(searchTerm);
             const matchesCategory = selectedCategory === 'All' || club.category === selectedCategory;
             const matchesSelection = !showOnlySelected || selectedClubs.has(club.name);
-
             return matchesSearch && matchesCategory && matchesSelection;
         });
     };
@@ -59,7 +57,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         return clubs.sort((a, b) => {
             let aValue, bValue;
-
             switch(sortCriteria) {
                 case 'name':
                     aValue = a.name.toLowerCase();
@@ -96,11 +93,11 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     };
-
+    
     // Render summary statistics
     const renderSummary = (clubs) => {
         if (clubs.length === 0) {
-            summaryStats.innerHTML = '<p class="text-gray-500 col-span-full text-center">No clubs to analyze</p>';
+            summaryStats.innerHTML = '<p class="text-center text-gray-500">No clubs to analyze.</p>';
             return;
         }
 
@@ -113,194 +110,145 @@ document.addEventListener('DOMContentLoaded', () => {
 
         summaryStats.innerHTML = `
             <div class="summary-item">
-                <div class="text-2xl font-bold text-ntu-blue">${totalClubs}</div>
-                <div class="text-sm text-gray-600">Total Clubs</div>
+                <p class="text-sm text-gray-500">Avg. Time</p>
+                <p class="text-2xl font-bold text-ntu-blue">${avgTime} <span class="text-base font-normal">hrs/wk</span></p>
             </div>
             <div class="summary-item">
-                <div class="text-2xl font-bold text-ntu-blue">${avgTime}h</div>
-                <div class="text-sm text-gray-600">Avg Time/Week</div>
+                <p class="text-sm text-gray-500">Avg. Physical</p>
+                <p class="text-2xl font-bold text-ntu-red">${avgPhysical}<span class="text-base font-normal">/10</span></p>
             </div>
             <div class="summary-item">
-                <div class="text-2xl font-bold text-ntu-blue">${avgPhysical}/10</div>
-                <div class="text-sm text-gray-600">Avg Physical</div>
+                <p class="text-sm text-gray-500">Avg. Mental</p>
+                <p class="text-2xl font-bold text-ntu-red">${avgMental}<span class="text-base font-normal">/10</span></p>
             </div>
             <div class="summary-item">
-                <div class="text-2xl font-bold text-ntu-blue">${avgMental}/10</div>
-                <div class="text-sm text-gray-600">Avg Mental</div>
+                <p class="text-sm text-gray-500">Avg. Entry</p>
+                <p class="text-2xl font-bold text-ntu-red">${avgEntry}<span class="text-base font-normal">/10</span></p>
             </div>
-            <div class="summary-item">
-                <div class="text-2xl font-bold text-ntu-blue">${avgEntry}/10</div>
-                <div class="text-sm text-gray-600">Avg Entry</div>
-            </div>
-            <div class="summary-item">
-                <div class="text-2xl font-bold text-ntu-blue">${avgCCA}</div>
-                <div class="text-sm text-gray-600">Avg CCA Points</div>
+             <div class="summary-item">
+                <p class="text-sm text-gray-500">Avg. CCA Pts</p>
+                <p class="text-2xl font-bold text-ntu-blue">${avgCCA}</p>
             </div>
         `;
     };
 
-    // Render club cards
+    // Render clubs
     const renderClubs = () => {
-        const filteredClubs = filterClubs();
-        const sortedClubs = sortClubs([...filteredClubs]);
+        const getScoreColor = (score) => {
+            if (score >= 8) return 'score-high';
+            if (score >= 4) return 'score-medium';
+            return 'score-low';
+        };
 
-        currentClubs = sortedClubs;
+        const filtered = filterClubs();
+        const sorted = sortClubs(filtered);
 
-        clubGrid.innerHTML = '';
-
-        if (sortedClubs.length === 0) {
+        if (sorted.length === 0) {
             noResultsMessage.classList.remove('hidden');
-            renderSummary([]);
-            return;
+            clubGrid.innerHTML = '';
+        } else {
+            noResultsMessage.classList.add('hidden');
+            clubGrid.innerHTML = sorted.map(club => `
+                <div class="club-card border-2 ${selectedClubs.has(club.name) ? 'border-ntu-red bg-red-50' : 'border-gray-200'} rounded-lg shadow-sm bg-white p-4 flex flex-col justify-between transition-all duration-300">
+                    <div>
+                        <div class="flex justify-between items-start mb-3">
+                            <div class="flex-grow">
+                                <h3 class="text-lg font-bold text-ntu-blue pr-2">${club.name}</h3>
+                                <span class="category-badge text-xs font-medium text-white px-2 py-1 rounded-full" data-category="${club.category}">${club.category}</span>
+                            </div>
+                            <div class="club-checkbox-container flex-shrink-0">
+                                <input type="checkbox" ${selectedClubs.has(club.name) ? 'checked' : ''} class="club-checkbox h-6 w-6" data-club-name="${club.name}">
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-600 mb-4 h-24 overflow-auto">${club.description}</p>
+                    </div>
+                    <div class="grid grid-cols-2 sm:grid-cols-5 gap-3 text-center">
+                        <div class="metric">
+                            <h4 class="font-semibold text-xs text-gray-500">Time Load</h4>
+                            <div class="metric-value-wrapper">
+                                <p class="text-2xl font-bold text-ntu-blue">${club.timeLoad.value}<span class="text-base font-normal">hr</span></p>
+                                <span class="metric-justification">${club.timeLoad.text}</span>
+                            </div>
+                        </div>
+                        <div class="metric">
+                            <h4 class="font-semibold text-xs text-gray-500">Physical</h4>
+                            <div class="metric-value-wrapper">
+                                <p class="text-2xl font-bold ${getScoreColor(club.physicalLoad.score)}">${club.physicalLoad.score}<span class="text-base font-normal">/10</span></p>
+                                <span class="metric-justification">${club.physicalLoad.justification}</span>
+                            </div>
+                        </div>
+                        <div class="metric">
+                            <h4 class="font-semibold text-xs text-gray-500">Mental</h4>
+                            <div class="metric-value-wrapper">
+                                <p class="text-2xl font-bold ${getScoreColor(club.mentalLoad.score)}">${club.mentalLoad.score}<span class="text-base font-normal">/10</span></p>
+                                <span class="metric-justification">${club.mentalLoad.justification}</span>
+                            </div>
+                        </div>
+                        <div class="metric">
+                            <h4 class="font-semibold text-xs text-gray-500">Entry</h4>
+                             <div class="metric-value-wrapper">
+                                <p class="text-2xl font-bold ${getScoreColor(club.entryCriteria.score)}">${club.entryCriteria.score}<span class="text-base font-normal">/10</span></p>
+                                <span class="metric-justification">${club.entryCriteria.justification}</span>
+                            </div>
+                        </div>
+                        <div class="metric">
+                            <h4 class="font-semibold text-xs text-gray-500">CCA Pts</h4>
+                            <p class="text-2xl font-bold text-ntu-blue">${club.ccaPoints}</p>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
         }
-
-        noResultsMessage.classList.add('hidden');
-
-        sortedClubs.forEach((club, index) => {
-            const card = document.createElement('div');
-            card.className = 'club-card bg-white rounded-xl shadow-sm p-6 flex flex-col transition-all duration-300 hover:shadow-lg hover:-translate-y-1 ring-1 ring-gray-900/5';
-
-            const rank = index + 1;
-            const sortCriteria = sortBy.value;
-            let rankValue = '';
-
-            switch(sortCriteria) {
-                case 'timeLoad':
-                    rankValue = `${club.timeLoad.value}h/week`;
-                    break;
-                case 'physicalLoad':
-                    rankValue = `${club.physicalLoad.score}/10`;
-                    break;
-                case 'mentalLoad':
-                    rankValue = `${club.mentalLoad.score}/10`;
-                    break;
-                case 'entryCriteria':
-                    rankValue = `${club.entryCriteria.score}/10`;
-                    break;
-                case 'ccaPoints':
-                    rankValue = `${club.ccaPoints} pts`;
-                    break;
-                default:
-                    rankValue = '';
-            }
-
-            const isSelected = selectedClubs.has(club.name);
-
-            card.innerHTML = `
-                <div class="flex justify-between items-start mb-3">
-                    <div class="flex items-start gap-3 flex-1">
-                        <div class="club-checkbox-container">
-                            <input 
-                                type="checkbox" 
-                                id="checkbox-${club.name.replace(/\s+/g, '-')}"
-                                class="club-checkbox w-5 h-5 text-ntu-red bg-gray-100 border-gray-300 rounded focus:ring-ntu-red focus:ring-2"
-                                ${isSelected ? 'checked' : ''}
-                                data-club-name="${club.name}"
-                            >
-                        </div>
-                        <div class="flex-1">
-                            <h3 class="font-bold text-lg text-gray-900 mb-1">${club.name}</h3>
-                            <span class="category-badge text-white text-xs px-2 py-1 rounded-full font-medium" data-category="${club.category}">
-                                ${club.category}
-                            </span>
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <!-- Google Search Button -->
-                        <button 
-                            class="google-search-btn p-2 bg-gray-100 hover:bg-gray-200 rounded-full transition-colors duration-200 flex items-center justify-center"
-                            data-club-name="${club.name}"
-                            title="Search '${club.name}' on Google"
-                        >
-                            <i data-lucide="search" class="w-4 h-4 text-gray-600"></i>
-                        </button>
-                        ${rankValue ? `<div class="text-right">
-                            <div class="text-xs text-gray-500">#${rank}</div>
-                            <div class="text-sm font-semibold text-ntu-blue">${rankValue}</div>
-                        </div>` : ''}
-                    </div>
-                </div>
-                
-                <p class="text-sm text-gray-600 mb-4 flex-1">${club.description}</p>
-                
-                <div class="space-y-2">
-                    <div class="grid grid-cols-2 gap-2">
-                        <div class="metric bg-gray-50 rounded-lg p-2">
-                            <div class="text-xs text-gray-500">Time Load</div>
-                            <div class="font-semibold text-sm">${club.timeLoad.value}h/week</div>
-                        </div>
-                        <div class="metric bg-gray-50 rounded-lg p-2">
-                            <div class="text-xs text-gray-500">CCA Points</div>
-                            <div class="font-semibold text-sm">${club.ccaPoints} pts</div>
-                        </div>
-                    </div>
-                    
-                    <div class="grid grid-cols-3 gap-2">
-                        <div class="metric bg-gray-50 rounded-lg p-2">
-                            <div class="text-xs text-gray-500">Physical</div>
-                            <div class="font-semibold text-sm">${club.physicalLoad.score}/10</div>
-                        </div>
-                        <div class="metric bg-gray-50 rounded-lg p-2">
-                            <div class="text-xs text-gray-500">Mental</div>
-                            <div class="font-semibold text-sm">${club.mentalLoad.score}/10</div>
-                        </div>
-                        <div class="metric bg-gray-50 rounded-lg p-2">
-                            <div class="text-xs text-gray-500">Entry</div>
-                            <div class="font-semibold text-sm">${club.entryCriteria.score}/10</div>
-                        </div>
-                    </div>
-                </div>
-            `;
-
-            clubGrid.appendChild(card);
-        });
-
-        // Add event listeners to checkboxes
-        document.querySelectorAll('.club-checkbox').forEach(checkbox => {
-            checkbox.addEventListener('change', (e) => {
-                const clubName = e.target.getAttribute('data-club-name');
-                toggleClubSelection(clubName);
-            });
-        });
-
-        renderSummary(sortedClubs);
-        lucide.createIcons();
+        updateSelectedCount();
+        renderSummary(sorted);
     };
 
-    // Event listeners
-    searchBar.addEventListener('input', renderClubs);
-    categoryFilter.addEventListener('change', renderClubs);
-    sortBy.addEventListener('change', renderClubs);
-    sortOrder.addEventListener('change', renderClubs);
+    // Main process function
+    const processFiltersAndSort = () => {
+        renderClubs();
+    };
+
+    // Event Listeners
+    searchBar.addEventListener('input', processFiltersAndSort);
+    categoryFilter.addEventListener('change', processFiltersAndSort);
+    sortBy.addEventListener('change', processFiltersAndSort);
+    sortOrder.addEventListener('change', processFiltersAndSort);
 
     showSelectedBtn.addEventListener('click', () => {
         showOnlySelected = true;
-        showSelectedBtn.classList.add('bg-red-700');
-        showAllBtn.classList.remove('bg-gray-700');
-        renderClubs();
+        showSelectedBtn.classList.add('bg-ntu-red', 'text-white');
+        showSelectedBtn.classList.remove('bg-gray-200');
+        showAllBtn.classList.add('bg-gray-200');
+        showAllBtn.classList.remove('bg-ntu-red', 'text-white');
+        processFiltersAndSort();
     });
 
     showAllBtn.addEventListener('click', () => {
         showOnlySelected = false;
-        showAllBtn.classList.add('bg-gray-700');
-        showSelectedBtn.classList.remove('bg-red-700');
-        renderClubs();
+        showAllBtn.classList.add('bg-ntu-red', 'text-white');
+        showAllBtn.classList.remove('bg-gray-200');
+        showSelectedBtn.classList.add('bg-gray-200');
+        showSelectedBtn.classList.remove('bg-ntu-red', 'text-white');
+        processFiltersAndSort();
     });
-
+    
     clearAllBtn.addEventListener('click', () => {
         selectedClubs.clear();
-        updateSelectedCount();
-        renderClubs();
-    });
-    document.getElementById('club-grid').addEventListener('click', e => {
-        const btn = e.target.closest('.google-search-btn');
-        if (!btn) return;
-        const name = btn.dataset.clubName;
-        const url  = `https://www.google.com/search?q=${encodeURIComponent('NTU ' + name)}`;
-        window.open(url, '_blank');
+        showOnlySelected = false;
+        showAllBtn.classList.add('bg-ntu-red', 'text-white');
+        showAllBtn.classList.remove('bg-gray-200');
+        showSelectedBtn.classList.add('bg-gray-200');
+        showSelectedBtn.classList.remove('bg-ntu-red', 'text-white');
+        processFiltersAndSort();
     });
 
-    // Initialize
-    updateSelectedCount();
-    renderClubs();
+    clubGrid.addEventListener('click', (e) => {
+        if (e.target.classList.contains('club-checkbox')) {
+            const clubName = e.target.dataset.clubName;
+            toggleClubSelection(clubName);
+        }
+    });
+
+    // Initial render
+    processFiltersAndSort();
 });
