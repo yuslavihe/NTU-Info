@@ -35,19 +35,19 @@ jobs:
           mkdir -p public
           
           # Copy main page files
-          cp index.html public/
-          cp main-style.css public/
+          cp v1/index.html public/
+          cp v1/main-style.css public/
           
           # Copy Room Layout PowerPoint
-          cp "Room Layout.pptx" public/ || echo "Room Layout.pptx not found, skipping..."
+          cp "v1/Room Layout.pptx" public/ || echo "Room Layout.pptx not found, skipping..."
           
           # Copy Clubs & Societies Explorer
           mkdir -p public/ntu-clubs
-          cp -r "NTU Clubs & Societies Explorer"/* public/ntu-clubs/
+          cp -r "v1/NTU Clubs & Societies Explorer"/* public/ntu-clubs/
           
           # Copy Airport Guide with updated styling
           mkdir -p public/airport-guide
-          cp -r "Airport Guide/v2"/* public/airport-guide/
+          cp -r "v1/Airport Guide/v2"/* public/airport-guide/
           
           # Update airport guide to use consistent styling
           if [ -f public/airport-guide/2-style.css ]; then
