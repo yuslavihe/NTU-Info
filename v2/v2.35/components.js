@@ -138,46 +138,60 @@ const createQuickAccessGrid = () => {
 };
 
 const createFooter = () => {
-    return `
-        <footer class="bg-white border-t border-gray-200">
-            <div class="container mx-auto px-4 md:px-6 py-12">
-                <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8">
-                    <div class="col-span-2 lg:col-span-2">
-                        <a href="#" class="flex items-center gap-2">
-                            <span class="w-8 h-8 bg-ntu-blue text-white flex items-center justify-center rounded-lg font-bold text-lg">N</span>
-                            <span class="font-bold text-lg text-gray-800">NTU Campus Hub</span>
-                        </a>
-                        <p class="mt-4 text-sm text-gray-600">A student-led project to enhance the NTU experience. Not an official university website.</p>
-                    </div>
-                    <div class="col-span-1">
-                        <h3 class="text-sm font-semibold text-gray-900 tracking-wider uppercase">Navigation</h3>
-                        <ul class="mt-4 space-y-2">
-                            ${navLinks.map(link => `
-                                <li>
-                                    <a href="${link.href}" class="text-sm text-gray-600 hover:text-ntu-red">${link.name}</a>
-                                </li>`).join('')}
-                        </ul>
-                    </div>
-                     <div class="col-span-1">
-                        <h3 class="text-sm font-semibold text-gray-900 tracking-wider uppercase">Resources</h3>
-                        <ul class="mt-4 space-y-2">
-                            <li><a href="https://www.ntu.edu.sg" target="_blank" rel="noopener noreferrer" class="text-sm text-gray-600 hover:text-ntu-red">Official NTU Website</a></li>
-                            <li><a href="#" class="text-sm text-gray-600 hover:text-ntu-red">Feedback</a></li>
-                            <li><a href="#" class="text-sm text-gray-600 hover:text-ntu-red">FAQ</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-span-2 md:col-span-1">
-                        <h3 class="text-sm font-semibold text-gray-900 tracking-wider uppercase">Contact</h3>
-                         <p class="mt-4 text-sm text-gray-600">Provide feedback or contribute to the project on GitHub.</p>
-                    </div>
-                </div>
-                <div class="mt-12 pt-8 border-t border-gray-200 text-center text-sm text-gray-500">
-                    <p>&copy; ${new Date().getFullYear()} NTU Campus Hub. All Rights Reserved.</p>
-                </div>
-            </div>
-        </footer>
-    `;
+  const year = new Date().getFullYear();
+  return `
+    <footer class="bg-white border-t border-gray-200">
+      <div class="container mx-auto px-4 md:px-6 py-12">
+        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8">
+          <div class="col-span-2 lg:col-span-2">
+            <a href="#" class="flex items-center gap-2">
+              <span class="w-8 h-8 bg-ntu-blue text-white flex items-center justify-center rounded-lg font-bold text-lg">N</span>
+              <span class="font-bold text-lg text-gray-800">NTU Campus Hub</span>
+            </a>
+            <p class="mt-4 text-sm text-gray-600">
+              A student-led project to enhance the NTU experience. Not an official university website.
+            </p>
+          </div>
+          <div class="col-span-1">
+            <h3 class="text-sm font-semibold text-gray-900 tracking-wider uppercase">Navigation</h3>
+            <ul class="mt-4 space-y-2">
+              ${navLinks.map(link => `
+                <li>
+                  <a href="${link.href}" class="text-sm text-gray-600 hover:text-ntu-red">${link.name}</a>
+                </li>`).join('')}
+            </ul>
+          </div>
+          <div class="col-span-1">
+            <h3 class="text-sm font-semibold text-gray-900 tracking-wider uppercase">Resources</h3>
+            <ul class="mt-4 space-y-2">
+              <li><a href="https://www.ntu.edu.sg" target="_blank" rel="noopener noreferrer" class="text-sm text-gray-600 hover:text-ntu-red">Official NTU Website</a></li>
+              <li><a href="#" class="text-sm text-gray-600 hover:text-ntu-red">Feedback</a></li>
+              <li><a href="#" class="text-sm text-gray-600 hover:text-ntu-red">FAQ</a></li>
+            </ul>
+          </div>
+          <div class="col-span-2 md:col-span-1">
+            <h3 class="text-sm font-semibold text-gray-900 tracking-wider uppercase">Contact</h3>
+            <p class="mt-4 text-sm text-gray-600">Provide feedback or contribute to the project on GitHub.</p>
+          </div>
+        </div>
+        <div class="mt-12 pt-8 border-t border-gray-200 text-center text-sm text-gray-500">
+          <p>
+            &copy; ${year} NTU Campus Hub. All Rights Reserved.
+            &nbsp;&bull;&nbsp;Built by
+            <a href="https://qrsntu.org"
+               class="text-blue-600 hover:text-blue-700 underline font-medium"
+               target="_blank"
+               rel="noopener noreferrer"
+               aria-label="Visit QRS@NTU website">
+              QRS@NTU
+            </a>
+          </p>
+        </div>
+      </div>
+    </footer>
+  `;
 };
+
 
 
 export const createApp = () => `
